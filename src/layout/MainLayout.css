@@ -1,0 +1,22 @@
+.main-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.side-bar {
+  width: 20%;
+}
+
+.content-area {
+  flex-grow: 1;
+}
+
+.main-layout > * {
+  padding: 1rem;
+  border: 1px solid #ccc;
+}

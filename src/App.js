@@ -1,18 +1,19 @@
-import logo from "./logo.svg";
+import MainLayout from "./layout/MainLayout";
+
 import "./App.css";
-import Counter from "./components/Counter";
-import CounterNoState from "./components/CounterNoState";
 
 function App() {
   const userName = "Ali";
+  const userAge = 19;
 
   return (
     <div className="App">
-      <h1>Merhaba {userName}</h1>
-      <Counter></Counter>
-      <CounterNoState />
+      <MainLayout userName={userName} userAge={userAge} />
     </div>
   );
 }
 
 export default App;
+
+export const PI = 3.14159267;
+export const User = { name: "ali" };

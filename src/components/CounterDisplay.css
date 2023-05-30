@@ -1,0 +1,9 @@
+.counter-display {
+  width: 400px;
+  padding: 2rem;
+  background-color: #ddd;
+  font-size: 2rem;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 1rem;
+}
