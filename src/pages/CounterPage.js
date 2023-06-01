@@ -1,9 +1,10 @@
 import Counter from "../components/Counter";
+import Title from "../components/Title";
 
 const CounterPage = () => {
   return (
     <div>
-      <h1>Counter Page</h1>
+      <Title>Counter Page</Title>
       <hr />
       <Counter />
     </div>

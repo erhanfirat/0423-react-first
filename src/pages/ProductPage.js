@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { Input } from "reactstrap";
+import Title from "../components/Title";
 
 const ProductPage = ({ products }) => {
   const [filterText, setFilterText] = useState("");
 
   return (
     <div>
-      <h1>Products Page</h1>
+      <Title>Products Page</Title>
       <hr />
-      <input
+      <Input
         type="text"
         onChange={(e) => {
           setFilterText(e.target.value);
