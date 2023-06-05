@@ -3,6 +3,13 @@
   flex-direction: column;
 }
 
+.main-layout > header,
+.main-layout > footer {
+  background-color: #333;
+  color: #fefefe;
+  padding: 1rem;
+}
+
 .content-container {
   display: flex;
   flex-direction: row;
@@ -10,13 +17,28 @@
 
 .side-bar {
   width: 20%;
+  min-width: 260px;
+  background-color: #ccc;
+  padding: 1rem;
+}
+.side-bar > nav > ul {
+  padding: 0;
+}
+.side-bar > nav > ul > li {
+  list-style: none;
+}
+
+.side-bar > nav > ul > li > a {
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
 }
 
 .content-area {
   flex-grow: 1;
+  padding: 1rem;
 }
 
 .main-layout > * {
-  padding: 1rem;
   border: 1px solid #ccc;
 }

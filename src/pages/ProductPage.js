@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Input } from "reactstrap";
+import { Link } from "react-router-dom";
 import Title from "../components/Title";
 
 const ProductPage = ({ products }) => {
@@ -24,6 +25,7 @@ const ProductPage = ({ products }) => {
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <span>{product.price}</span>
+              <Link to={`/product-detail/${product.id}`}>İncele</Link>
             </div>
           );
         })}
