@@ -1,11 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
 
 import Greeting from "../components/Greeting";
 import CounterPage from "../pages/CounterPage";
@@ -14,30 +8,67 @@ import HomePage from "../pages/HomePage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 
 import "./MainLayout.css";
+import CreateProductPage from "../pages/CreateProductPage";
+
+const userFormInitial = { email: "", password: "" };
 
 const MainLayout = (props) => {
   const [show, setShow] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [userForm, setUserForm] = useState(userFormInitial);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    // axios.post("endpoint", formData);
+    console.log("submitHandler > userForm: ", userForm);
+  };
+
+  const inputChangeHandler = (e) => {
+    const { name, value } = e.target;
+
+    setUserForm({ ...userForm, [name]: value });
+
+    // setUserForm({ email: userForm.email, passsword: userForm.passsword, [name]: value });
+  };
+
+  const resetForm = () => {
+    setUserForm(userFormInitial);
+  };
+
+  useEffect(() => {
+    console.log("userForm: ", userForm);
+  }, [userForm]);
 
   return (
     <div className="main-layout">
       <header>
         <Greeting user={props.userName} age={props.userAge} nickName="sss" />
-        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-          <DropdownToggle caret>Dropdown</DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem header>Header</DropdownItem>
-            <DropdownItem>Some Action</DropdownItem>
-            <DropdownItem text>Dropdown Item Text</DropdownItem>
-            <DropdownItem disabled>Action (disabled)</DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>Foo Action</DropdownItem>
-            <DropdownItem>Bar Action</DropdownItem>
-            <DropdownItem>Quo Action</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+
+        <form onSubmit={submitHandler}>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            onChange={inputChangeHandler}
+            value={userForm.email}
+            placeholder="Email giriniz..."
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            onChange={inputChangeHandler}
+            value={userForm.password}
+          />
+          <button type="submit">Login</button>
+          <button type="button" onClick={resetForm}>
+            Reset Form
+          </button>
+        </form>
       </header>
       <div className="content-container">
         <div className="side-bar">
@@ -81,6 +112,24 @@ const MainLayout = (props) => {
               </li>
               <li>
                 <NavLink
+                  to="/create-product"
+                  exact
+                  style={(isActive) => {
+                    if (isActive) {
+                      return {
+                        background: "#333",
+                        color: "#eee",
+                      };
+                    } else {
+                      return {};
+                    }
+                  }}
+                >
+                  Create Product
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   exact
                   to="/counter"
                   style={(isActive) => {
@@ -112,11 +161,13 @@ const MainLayout = (props) => {
               <ProductPage products={props.products} />
             </Route>
 
+            <Route path="/create-product" exact>
+              <CreateProductPage />
+            </Route>
+
             <Route path="/product-detail/:productId" exact>
               <ProductDetailPage products={props.products} />
             </Route>
-
-            
           </Switch>
         </div>
       </div>
