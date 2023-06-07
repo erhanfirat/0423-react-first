@@ -9,6 +9,7 @@ import ProductDetailPage from "../pages/ProductDetailPage";
 
 import "./MainLayout.css";
 import CreateProductPage from "../pages/CreateProductPage";
+import CreateProductYupPage from "../pages/CreateProductYupPage";
 
 const userFormInitial = { email: "", password: "" };
 
@@ -130,6 +131,24 @@ const MainLayout = (props) => {
               </li>
               <li>
                 <NavLink
+                  to="/create-product-yup"
+                  exact
+                  style={(isActive) => {
+                    if (isActive) {
+                      return {
+                        background: "#333",
+                        color: "#eee",
+                      };
+                    } else {
+                      return {};
+                    }
+                  }}
+                >
+                  Create Product Yup
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   exact
                   to="/counter"
                   style={(isActive) => {
@@ -163,6 +182,10 @@ const MainLayout = (props) => {
 
             <Route path="/create-product" exact>
               <CreateProductPage />
+            </Route>
+
+            <Route path="/create-product-yup" exact>
+              <CreateProductYupPage />
             </Route>
 
             <Route path="/product-detail/:productId" exact>
