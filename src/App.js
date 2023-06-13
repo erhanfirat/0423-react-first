@@ -31,6 +31,7 @@ function App() {
 
   return (
     <div className="App">
+      Selam
       <MainLayout userName={userName} userAge={userAge} products={products} />
     </div>
   );

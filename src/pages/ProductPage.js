@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import Title from "../components/Title";
 
 const ProductPage = ({ products }) => {
   const [filterText, setFilterText] = useState("");
+
+  // Component did mount
+  useEffect(() => {
+    console.log("Product Page Yüklendi!");
+
+    // Component will unmount
+    return () => {
+      console.log("Prduct Page Silindi!");
+    };
+  }, []);
+
+  // component did update
+  useEffect(() => {
+    console.log("ProductPage güncellendi!");
+  });
 
   return (
     <div>
@@ -21,7 +36,7 @@ const ProductPage = ({ products }) => {
         .filter((p) => p.name.toLowerCase().includes(filterText.toLowerCase()))
         .map((product) => {
           return (
-            <div>
+            <div key={product.id}>
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <span>{product.price}</span>
