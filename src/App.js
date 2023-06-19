@@ -1,14 +1,22 @@
-import MainLayout from "./layout/MainLayout";
+import MainLayout, { userFormInitial } from "./layout/MainLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 import "./App.css";
+import { Button } from "reactstrap";
+
+console.log("userFormInitial: ", userFormInitial)
 
 function App() {
-  const userName = "Ali";
-  const userAge = 19;
   const [products, setProducts] = useState([]);
+  const [user, setUser] = useState({
+    name: "ali",
+    email: "",
+    age: 19,
+  });
 
+  // rerender
+  
   useEffect(() => {
     console.log("[useEffect] > Application Did Mount!");
     axios
@@ -31,7 +39,8 @@ function App() {
 
   return (
     <div className="App">
-      <MainLayout userName={userName} userAge={userAge} products={products} />
+      <Button onClick={() => setUser({ name: "", age: 0, email: ""})}>Reset User</Button>
+      <MainLayout user={user} products={products} />
     </div>
   );
 }

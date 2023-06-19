@@ -11,7 +11,7 @@ import "./MainLayout.css";
 import CreateProductPage from "../pages/CreateProductPage";
 import CreateProductYupPage from "../pages/CreateProductYupPage";
 
-const userFormInitial = { email: "", password: "" };
+export const userFormInitial = { email: "", password: "" };
 
 const MainLayout = (props) => {
   const [show, setShow] = useState(true);
@@ -38,14 +38,38 @@ const MainLayout = (props) => {
     setUserForm(userFormInitial);
   };
 
+  const navLinkAcitve = (isActive) => {
+    if (isActive) {
+      return {
+        background: "#333",
+        color: "#eee",
+      };
+    } else {
+      return {};
+    }
+  };
+
   useEffect(() => {
     console.log("userForm: ", userForm);
   }, [userForm]);
 
+  useEffect(() => {
+    console.log("[useEffect] > MainLayout Did Mount!");
+  }, []);
+
+  useEffect(() => {
+    // yeni renderı yakalar!
+    // component update fazı
+  }, [show, dropdownOpen, userForm, props]);
+
   return (
     <div className="main-layout">
       <header>
-        <Greeting user={props.userName} age={props.userAge} nickName="sss" />
+        {show && (
+          <Greeting user={props.user} nickName="sss">
+            <span>Children alanından merhabalar</span>
+          </Greeting>
+        )}
 
         <form onSubmit={submitHandler}>
           <label htmlFor="email">Email</label>
@@ -76,20 +100,7 @@ const MainLayout = (props) => {
           <nav>
             <ul>
               <li>
-                <NavLink
-                  to="/"
-                  exact
-                  style={(isActive) => {
-                    if (isActive) {
-                      return {
-                        background: "#333",
-                        color: "#eee",
-                      };
-                    } else {
-                      return {};
-                    }
-                  }}
-                >
+                <NavLink to="/" exact style={navLinkAcitve}>
                   Home
                 </NavLink>
               </li>
@@ -97,71 +108,24 @@ const MainLayout = (props) => {
                 <NavLink
                   to="/products"
                   exact
-                  style={(isActive) => {
-                    if (isActive) {
-                      return {
-                        background: "#333",
-                        color: "#eee",
-                      };
-                    } else {
-                      return {};
-                    }
-                  }}
+                  data-cy="product-link"
+                  style={navLinkAcitve}
                 >
                   Products
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  to="/create-product"
-                  exact
-                  style={(isActive) => {
-                    if (isActive) {
-                      return {
-                        background: "#333",
-                        color: "#eee",
-                      };
-                    } else {
-                      return {};
-                    }
-                  }}
-                >
+                <NavLink to="/create-product" exact style={navLinkAcitve}>
                   Create Product
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  to="/create-product-yup"
-                  exact
-                  style={(isActive) => {
-                    if (isActive) {
-                      return {
-                        background: "#333",
-                        color: "#eee",
-                      };
-                    } else {
-                      return {};
-                    }
-                  }}
-                >
+                <NavLink to="/create-product-yup" exact style={navLinkAcitve}>
                   Create Product Yup
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  exact
-                  to="/counter"
-                  style={(isActive) => {
-                    if (isActive) {
-                      return {
-                        background: "#333",
-                        color: "#eee",
-                      };
-                    } else {
-                      return {};
-                    }
-                  }}
-                >
+                <NavLink exact to="/counter" style={navLinkAcitve}>
                   Counter
                 </NavLink>
               </li>
@@ -180,9 +144,7 @@ const MainLayout = (props) => {
               <ProductPage products={props.products} />
             </Route>
 
-            <Route path="/create-product" exact>
-              <CreateProductPage />
-            </Route>
+            <Route path="/create-product" exact component={CreateProductPage} />
 
             <Route path="/create-product-yup" exact>
               <CreateProductYupPage />

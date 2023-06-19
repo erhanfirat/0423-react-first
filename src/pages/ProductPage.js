@@ -3,6 +3,7 @@ import { Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import Title from "../components/Title";
 
+// Props Drilling: 
 const ProductPage = ({ products }) => {
   const [filterText, setFilterText] = useState("");
 
@@ -12,6 +13,7 @@ const ProductPage = ({ products }) => {
       <hr />
       <Input
         type="text"
+        data-cy="product-filter-input"
         onChange={(e) => {
           setFilterText(e.target.value);
         }}
@@ -22,7 +24,7 @@ const ProductPage = ({ products }) => {
         .map((product) => {
           return (
             <div>
-              <h3>{product.name}</h3>
+              <h3 data-cy="product-name-h3">{product.name}</h3>
               <p>{product.description}</p>
               <span>{product.price}</span>
               <Link to={`/product-detail/${product.id}`}>İncele</Link>

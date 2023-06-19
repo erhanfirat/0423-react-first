@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CounterDisplay from "./CounterDisplay";
 
-const Counter = () => {
+const Counter = ({ user }) => {
   // UPDATE: state & prop değerlerinden herhangi biri değiştiği zaman component update(rerender) edilir!
   const [counter, setCounter] = useState(0);
   const [counter2, setCounter2] = useState(0);
@@ -23,10 +23,15 @@ const Counter = () => {
   //   };
   // }, []);
 
-  // useEffect(() => {
-  //   // UPDATE
-  //   console.log("[useEffect] > Counter Component Did UPDATE!");
-  // });
+  useEffect(() => {
+    // UPDATE
+    console.log("[useEffect] > Counter Component Did UPDATE!");
+  }, [counter, counter2, user]);
+
+  useEffect(() => {
+    // UPDATE
+    console.log("[useEffect] > Counter Component Did UPDATE!");
+  });
 
   const arttir = () => {
     setCounter(counter + 1);
