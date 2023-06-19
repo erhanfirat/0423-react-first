@@ -10,6 +10,7 @@ import ProductDetailPage from "../pages/ProductDetailPage";
 import "./MainLayout.css";
 import CreateProductPage from "../pages/CreateProductPage";
 import CreateProductYupPage from "../pages/CreateProductYupPage";
+import CreateProductHookPage from "../pages/CreateProductHookPage";
 
 export const userFormInitial = { email: "", password: "" };
 
@@ -125,6 +126,11 @@ const MainLayout = (props) => {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/create-product-hook" exact style={navLinkAcitve}>
+                  Create Product Hook
+                </NavLink>
+              </li>
+              <li>
                 <NavLink exact to="/counter" style={navLinkAcitve}>
                   Counter
                 </NavLink>
@@ -148,6 +154,10 @@ const MainLayout = (props) => {
 
             <Route path="/create-product-yup" exact>
               <CreateProductYupPage />
+            </Route>
+
+            <Route path="/create-product-hook" exact>
+              <CreateProductHookPage />
             </Route>
 
             <Route path="/product-detail/:productId" exact>

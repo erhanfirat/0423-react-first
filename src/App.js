@@ -1,11 +1,13 @@
 import MainLayout, { userFormInitial } from "./layout/MainLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-import "./App.css";
+import { ToastContainer, toast } from "react-toastify";
 import { Button } from "reactstrap";
 
-console.log("userFormInitial: ", userFormInitial)
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+
+console.log("userFormInitial: ", userFormInitial);
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -16,7 +18,7 @@ function App() {
   });
 
   // rerender
-  
+
   useEffect(() => {
     console.log("[useEffect] > Application Did Mount!");
     axios
@@ -24,6 +26,7 @@ function App() {
       .then((res) => {
         // başarı
         setProducts(res.data);
+        toast.success("Product dataları yüklendi!");
       })
       .catch((err) => {
         // hata
@@ -39,8 +42,11 @@ function App() {
 
   return (
     <div className="App">
-      <Button onClick={() => setUser({ name: "", age: 0, email: ""})}>Reset User</Button>
+      <Button onClick={() => setUser({ name: "", age: 0, email: "" })}>
+        Reset User
+      </Button>
       <MainLayout user={user} products={products} />
+      <ToastContainer />
     </div>
   );
 }
