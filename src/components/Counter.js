@@ -6,13 +6,23 @@ const Counter = ({ user }) => {
   const [counter, setCounter] = useState(0);
   const [counter2, setCounter2] = useState(0);
 
+  const arttir = () => {
+    setCounter(counter + 1);
+  };
+
+  const randomNumber = () => {
+    setCounter(Math.floor(Math.random() * 1000));
+  };
+
+  // Component Did Mount
   useEffect(() => {
-    console.log("[useEffect] > counter yeni değeri: ", counter);
+    console.log("[useEffect] > Component Did Mount ");
 
     return () => {
-      console.log("[useEffect] > counter return: ", counter);
+      // Component Will Unmount!
+      console.log("[useEffect return] > Component Will Unmount");
     };
-  }, [counter]);
+  }, []);
 
   // useEffect(() => {
   //   // MOUNT
@@ -32,14 +42,6 @@ const Counter = ({ user }) => {
     // UPDATE
     console.log("[useEffect] > Counter Component Did UPDATE!");
   });
-
-  const arttir = () => {
-    setCounter(counter + 1);
-  };
-
-  const randomNumber = () => {
-    setCounter(Math.floor(Math.random() * 1000));
-  };
 
   return (
     <div className="counter-component">
