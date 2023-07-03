@@ -1,13 +1,10 @@
 .main-layout {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
 }
 
 .main-layout > header,
 .main-layout > footer {
-  background-color: #333;
-  color: #fefefe;
-  padding: 1rem;
+  @apply bg-gray-900 text-slate-200 p-4;
 }
 
 .content-container {

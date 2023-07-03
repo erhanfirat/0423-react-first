@@ -1,26 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import CounterDisplay from "./CounterDisplay";
 
-const Counter = ({ user }) => {
-  // UPDATE: state & prop değerlerinden herhangi biri değiştiği zaman component update(rerender) edilir!
-  const [counter, setCounter] = useState(0);
-  const [counter2, setCounter2] = useState(0);
+const counterInitial = 0;
+
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case "ARTTIR":
+      if (state < 10) {
+        return state + 1;
+      } else {
+        return state;
+      }
+    case "AZALT":
+      if (state > 0) {
+        return state - 1;
+      } else {
+        return state;
+      }
+    default:
+      return state;
+  }
+};
+
+const CounterReducer = ({ user }) => {
+  const [counter, dispatchCounter] = useReducer(counterReducer, counterInitial);
 
   const arttir = () => {
-    if (counter < 10) {
-      setCounter(counter + 1);
-    }
-  };
-
-  const randomNumber = () => {
-    // setCounter(Math.floor(Math.random() * 1000));
-    setCounter(15);
+    dispatchCounter({
+      type: "ARTTIR",
+    });
   };
 
   // Component Did Mount
   useEffect(() => {
     console.log("[useEffect] > Component Did Mount ");
-    setCounter(20);
 
     return () => {
       // Component Will Unmount!
@@ -40,7 +53,7 @@ const Counter = ({ user }) => {
   useEffect(() => {
     // UPDATE
     console.log("[useEffect] > Counter Component Did UPDATE!");
-  }, [counter, counter2, user]);
+  }, [counter, user]);
 
   useEffect(() => {
     // UPDATE
@@ -49,21 +62,18 @@ const Counter = ({ user }) => {
 
   return (
     <div className="counter-component">
-      counter 1:
+      counter:
       <CounterDisplay counter={counter} />
       <button
         onClick={() => {
-          if (counter !== 0) {
-            setCounter(counter - 1);
-          }
+          dispatchCounter({ type: "AZALT" });
         }}
       >
         Azalt
       </button>
       <button onClick={arttir}>Arttır</button>
-      <button onClick={randomNumber}>Random</button>
     </div>
   );
 };
 
-export default Counter;
+export default CounterReducer;

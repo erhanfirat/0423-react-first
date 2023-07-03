@@ -6,6 +6,7 @@ import { Button } from "reactstrap";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import { eachWeekOfInterval, formatISO } from "date-fns";
 
 console.log("userFormInitial: ", userFormInitial);
 
@@ -16,6 +17,15 @@ function App() {
     email: "",
     age: 19,
   });
+
+  const dateISO = formatISO(new Date());
+
+  const weekMs = 7 * 24 * 60 * 60 * 1000;
+  const startDateMs = new Date(2023, 5, 20).getTime();
+
+  for (let i = 0; i < 5; i++) {
+    console.log(new Date(startDateMs + i * weekMs));
+  }
 
   // rerender
 
@@ -42,6 +52,7 @@ function App() {
 
   return (
     <div className="App">
+      {dateISO}
       <Button onClick={() => setUser({ name: "", age: 0, email: "" })}>
         Reset User
       </Button>

@@ -11,6 +11,7 @@ import "./MainLayout.css";
 import CreateProductPage from "../pages/CreateProductPage";
 import CreateProductYupPage from "../pages/CreateProductYupPage";
 import CreateProductHookPage from "../pages/CreateProductHookPage";
+import CounterReducerPage from "../pages/CounterReducerPage";
 
 export const userFormInitial = { email: "", password: "" };
 
@@ -65,7 +66,7 @@ const MainLayout = (props) => {
 
   return (
     <div className="main-layout">
-      <header>
+      <header className="border-4 border-orange-400 rounded-2xl bg-amber-800 text-slate-200">
         {show && (
           <Greeting user={props.user} nickName="sss">
             <span>Children alanından merhabalar</span>
@@ -135,6 +136,11 @@ const MainLayout = (props) => {
                   Counter
                 </NavLink>
               </li>
+              <li>
+                <NavLink exact to="/counter-reducer" style={navLinkAcitve}>
+                  Counter Reducer
+                </NavLink>
+              </li>
             </ul>
           </nav>
         </div>
@@ -145,6 +151,9 @@ const MainLayout = (props) => {
             </Route>
             <Route path="/counter" exact>
               <CounterPage />
+            </Route>
+            <Route path="/counter-reducer" exact>
+              <CounterReducerPage />
             </Route>
             <Route path="/products" exact>
               <ProductPage products={props.products} />
