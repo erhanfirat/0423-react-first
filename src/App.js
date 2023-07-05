@@ -1,12 +1,13 @@
 import MainLayout, { userFormInitial } from "./layout/MainLayout";
 import { useEffect, useState } from "react";
+import { eachWeekOfInterval, formatISO } from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Button } from "reactstrap";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import { eachWeekOfInterval, formatISO } from "date-fns";
 
 console.log("userFormInitial: ", userFormInitial);
 
@@ -17,6 +18,9 @@ function App() {
     email: "",
     age: 19,
   });
+
+  const counter = useSelector((store) => store.count.counter);
+  const dispatch = useDispatch();
 
   const dateISO = formatISO(new Date());
 
@@ -52,6 +56,21 @@ function App() {
 
   return (
     <div className="App">
+      <h3>Redux Store Counter: {counter}</h3>
+      <Button
+        onClick={() => {
+          dispatch({ type: "INCREASE" });
+        }}
+      >
+        Increse
+      </Button>
+      <Button
+        onClick={() => {
+          dispatch({ type: "DECREASE" });
+        }}
+      >
+        Decrease
+      </Button>
       {dateISO}
       <Button onClick={() => setUser({ name: "", age: 0, email: "" })}>
         Reset User
