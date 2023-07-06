@@ -33,22 +33,22 @@ function App() {
 
   // rerender
 
-  useEffect(() => {
-    console.log("[useEffect] > Application Did Mount!");
-    axios
-      .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
-      .then((res) => {
-        // başarı
-        setProducts(res.data);
-        toast.success("Product dataları yüklendi!");
-      })
-      .catch((err) => {
-        // hata
-      })
-      .finally(() => {
-        //
-      });
-  }, []);
+  // useEffect(() => {
+  //   console.log("[useEffect] > Application Did Mount!");
+  //   axios
+  //     .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
+  //     .then((res) => {
+  //       // başarı
+  //       setProducts(res.data);
+  //       toast.success("Product dataları yüklendi!");
+  //     })
+  //     .catch((err) => {
+  //       // hata
+  //     })
+  //     .finally(() => {
+  //       //
+  //     });
+  // }, []);
 
   useEffect(() => {
     console.log("producst > ", products);

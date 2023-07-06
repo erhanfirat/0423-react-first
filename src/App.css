@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.product-item {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  padding: 1rem;
+}

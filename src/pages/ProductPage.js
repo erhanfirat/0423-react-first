@@ -2,14 +2,20 @@ import { useEffect, useState } from "react";
 import { Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import Title from "../components/Title";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsActionCreator } from "../store/actionCreator/actionCreator";
 
 // Props Drilling:
-const ProductPage = ({ products }) => {
+const ProductPage = () => {
   const [filterText, setFilterText] = useState("");
+
+  const dispatch = useDispatch();
+  const products = useSelector((store) => store.product.products);
 
   // Component did mount
   useEffect(() => {
     console.log("Product Page Yüklendi!");
+    dispatch(getProductsActionCreator());
 
     // Component will unmount
     return () => {
@@ -38,7 +44,8 @@ const ProductPage = ({ products }) => {
         .filter((p) => p.name.toLowerCase().includes(filterText.toLowerCase()))
         .map((product) => {
           return (
-            <div key={product.id}>
+            <div key={product.id} className="product-item">
+              <img src={product.img} />
               <h3 data-cy="product-name-h3">{product.name}</h3>
               <p>{product.description}</p>
               <span>{product.price}</span>
