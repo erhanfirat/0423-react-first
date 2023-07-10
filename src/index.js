@@ -7,6 +7,7 @@ import App from "./App";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import CounterProvider from "./context/CounterProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,7 +17,9 @@ root.render(
   // sağlayıcı: React'e redux store ı bağlıyor
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <CounterProvider>
+        <App />
+      </CounterProvider>
     </BrowserRouter>
   </Provider>
 );

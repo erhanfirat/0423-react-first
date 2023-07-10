@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Button } from "reactstrap";
+import CardContainer from "./components/CardContainer";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -77,6 +78,13 @@ function App() {
       </Button>
       <MainLayout user={user} products={products} />
       <ToastContainer />
+
+      <hr />
+      <CardContainer>
+        <p>
+          Buraya yazılan her şey, card container a children propu olarak gider!
+        </p>
+      </CardContainer>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
 
 import Greeting from "../components/Greeting";
@@ -12,6 +12,7 @@ import CreateProductPage from "../pages/CreateProductPage";
 import CreateProductYupPage from "../pages/CreateProductYupPage";
 import CreateProductHookPage from "../pages/CreateProductHookPage";
 import CounterReducerPage from "../pages/CounterReducerPage";
+import { CounterContext } from "../context/CounterProvider";
 
 export const userFormInitial = { email: "", password: "" };
 
@@ -19,6 +20,7 @@ const MainLayout = (props) => {
   const [show, setShow] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userForm, setUserForm] = useState(userFormInitial);
+  const { counter: sayac } = useContext(CounterContext);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
@@ -140,6 +142,9 @@ const MainLayout = (props) => {
                 <NavLink exact to="/counter-reducer" style={navLinkAcitve}>
                   Counter Reducer
                 </NavLink>
+              </li>
+              <li>
+                <h3>Context API counter: {sayac}</h3>
               </li>
             </ul>
           </nav>

@@ -43,3 +43,12 @@
   margin: 1rem;
   padding: 1rem;
 }
+
+
+.card-container {
+  background-color: #ddd;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+  margin: .5rem;
+  padding: .5rem;
+}
