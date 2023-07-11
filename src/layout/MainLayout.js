@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Switch, Route, NavLink } from "react-router-dom";
+import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 
 import Greeting from "../components/Greeting";
 import CounterPage from "../pages/CounterPage";
@@ -13,6 +13,8 @@ import CreateProductYupPage from "../pages/CreateProductYupPage";
 import CreateProductHookPage from "../pages/CreateProductHookPage";
 import CounterReducerPage from "../pages/CounterReducerPage";
 import { CounterContext } from "../context/CounterProvider";
+import LoginPage from "../pages/LoginPage";
+import ProtectedPage from "../pages/ProtectedPage";
 
 export const userFormInitial = { email: "", password: "" };
 
@@ -167,11 +169,21 @@ const MainLayout = (props) => {
             <Route path="/create-product" exact component={CreateProductPage} />
 
             <Route path="/create-product-yup" exact>
-              <CreateProductYupPage />
+              <ProtectedPage
+                pageComponent={CreateProductYupPage}
+                from={"/create-product-yup"}
+              />
             </Route>
 
             <Route path="/create-product-hook" exact>
-              <CreateProductHookPage />
+              <ProtectedPage
+                pageComponent={CreateProductHookPage}
+                from={"/create-product-hook"}
+              />
+            </Route>
+
+            <Route path="/login" exact>
+              <LoginPage />
             </Route>
 
             <Route path="/product-detail/:productId" exact>

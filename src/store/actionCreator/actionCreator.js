@@ -1,10 +1,10 @@
 import axios from "axios";
 import { PRODUCT_ACTIONS } from "../reducers/productReducer";
+import { API } from "../../api/api";
 
 export const getProductsActionCreator = () => (dispatch) => {
   dispatch({ type: PRODUCT_ACTIONS.fetchStart });
-  axios
-    .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
+  API.get("/products")
     .then((res) =>
       dispatch({
         type: PRODUCT_ACTIONS.fetchSuccess,
