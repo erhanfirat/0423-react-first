@@ -1,9 +1,11 @@
 import axios from "axios";
 import { PRODUCT_ACTIONS } from "../reducers/productReducer";
 import { API } from "../../api/api";
+import { REQ_TYPES } from "../../api/useAxios";
 
 export const getProductsActionCreator = () => (dispatch) => {
   dispatch({ type: PRODUCT_ACTIONS.fetchStart });
+
   API.get("/products")
     .then((res) =>
       dispatch({

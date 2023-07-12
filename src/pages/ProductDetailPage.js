@@ -16,7 +16,6 @@ const ProductDetailPage = () => {
   };
 
   useEffect(() => {
-    debugger;
     const p = products.filter((p) => p.id === productId);
     if (p.length > 0) {
       setProduct(p[0]);

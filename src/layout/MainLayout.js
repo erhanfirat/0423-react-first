@@ -182,6 +182,10 @@ const MainLayout = (props) => {
               />
             </Route>
 
+            <Route path="/edit-product/:productId" exact>
+              <CreateProductHookPage />
+            </Route>
+
             <Route path="/login" exact>
               <LoginPage />
             </Route>

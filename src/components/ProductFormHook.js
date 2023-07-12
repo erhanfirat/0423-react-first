@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
 import * as Yup from "yup";
+import { API } from "../api/api";
 
-const ProductFormHook = () => {
+const ProductFormHook = ({ productInitial }) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    setValue,
   } = useForm({
     mode: "onSubmit",
     defaultValues: {
@@ -24,18 +26,34 @@ const ProductFormHook = () => {
 
   const submitHandler = (formData) => {
     console.log("formData: ", formData);
-    axios
-      .post(
-        "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products",
-        formData
-      )
-      .then((res) => {
-        toast.success("Ürün başarıyla kaydedildi.");
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+    // yeni ürün mü? yoksa eski ürün mü?
+    // create or update?
+    if (formData.id) {
+      API.put(`/products/${formData.id}`, formData);
+    } else {
+      API.post("/products", formData)
+        .then((res) => {
+          toast.success("Ürün başarıyla kaydedildi.");
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
+    }
   };
+
+  useEffect(() => {
+    if (productInitial) {
+      setValue("name", productInitial.name);
+      setValue("description", productInitial.description);
+      setValue("img", productInitial.img);
+      setValue("price", productInitial.price);
+      setValue("stock", productInitial.stock);
+      setValue("shippingFree", productInitial.shippingFree);
+      if (productInitial.id) {
+        setValue("id", productInitial.id);
+      }
+    }
+  }, [productInitial]);
 
   return (
     <div>
@@ -120,7 +138,7 @@ const ProductFormHook = () => {
           type="submit"
           className={`btn ${isValid ? "btn-primary" : "btn-danger"}`}
         >
-          Create
+          Save
         </button>
       </form>
     </div>
