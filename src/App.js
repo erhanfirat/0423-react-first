@@ -57,25 +57,6 @@ function App() {
 
   return (
     <div className="App">
-      <h3>Redux Store Counter: {counter}</h3>
-      <Button
-        onClick={() => {
-          dispatch({ type: "INCREASE" });
-        }}
-      >
-        Increse
-      </Button>
-      <Button
-        onClick={() => {
-          dispatch({ type: "DECREASE" });
-        }}
-      >
-        Decrease
-      </Button>
-      {dateISO}
-      <Button onClick={() => setUser({ name: "", age: 0, email: "" })}>
-        Reset User
-      </Button>
       <MainLayout user={user} products={products} />
       <ToastContainer />
 
