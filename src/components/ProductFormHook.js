@@ -13,7 +13,7 @@ const ProductFormHook = ({ productInitial }) => {
     formState: { errors, isValid },
     setValue,
   } = useForm({
-    mode: "onSubmit",
+    mode: "onChange",
     defaultValues: {
       name: "",
       description: "",
@@ -29,7 +29,13 @@ const ProductFormHook = ({ productInitial }) => {
     // yeni ürün mü? yoksa eski ürün mü?
     // create or update?
     if (formData.id) {
-      API.put(`/products/${formData.id}`, formData);
+      API.put(`/products/${formData.id}`, formData)
+        .then((res) => {
+          toast.success("Ürün başarıyla kaydedildi.");
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
     } else {
       API.post("/products", formData)
         .then((res) => {
@@ -78,7 +84,7 @@ const ProductFormHook = ({ productInitial }) => {
             className={`form-control ${errors.description ? "is-invalid" : ""}`}
             {...register("description", {
               validate: (val) => {
-                return val.length > 10
+                return val?.length > 10
                   ? true
                   : "10 Karakterden fazla bir açıklama giriniz.";
               },

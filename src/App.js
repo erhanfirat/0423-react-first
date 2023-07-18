@@ -55,9 +55,14 @@ function App() {
     console.log("producst > ", products);
   }, [products]);
 
+  const mainProps = {
+    user,
+    products,
+  };
+
   return (
     <div className="App">
-      <MainLayout user={user} products={products} />
+      <MainLayout {...mainProps} />
       <ToastContainer />
 
       <hr />
