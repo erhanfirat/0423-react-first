@@ -10,6 +10,8 @@ import CardContainer from "./components/CardContainer";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
+// bu bir JS dosyasıdır
+
 console.log("userFormInitial: ", userFormInitial);
 
 function App() {
